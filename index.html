@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Carte OpenLayers + Cesium</title>
+
+    <!-- OpenLayers -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
+
+    <!-- Cesium -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.118/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.118/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Partie gauche : OpenLayers -->
+    <div class="left">
+        <div class="sidebar">
+            <h3>Légende</h3>
+            <div id="legend-content"></div>
+            <h3>Logo</h3>
+            <img src="https://www.laformation.ma/images/300/eco-xxmxndailt67geiitp3jdsbnm611l513012016022110.jpg" alt="Logo">
+            <h3>Auteur</h3>
+            <p>Zineb El Mouden | Hajar Oulabasse</p>
+        </div>
+        <div id="map"></div>
+        <div id="scale-line"></div>
+        <div id="mouse-position"></div>
+    </div>s
+
+    <!-- Partie droite : Cesium -->
+    <div class="right">
+        <div id="cesiumContainer"></div>
+        <div id="toolbar">
+            <button id="measureBtn">Measure Distance</button>
+            <select id="unitSelect">
+                <option value="meters">Meters</option>
+                <option value="kilometers">Kilometers</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="main.js"> </script>
+
+</body>
+</html>
