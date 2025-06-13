@@ -16,36 +16,23 @@
 </head>
 <body>
 
-<div class="container">
-    <!-- Partie gauche : OpenLayers -->
-    <div class="left">
-        <div class="sidebar">
-            <h3>Légende</h3>
-            <div id="legend-content"></div>
-            <h3>Logo</h3>
-            <img src="https://www.laformation.ma/images/300/eco-xxmxndailt67geiitp3jdsbnm611l513012016022110.jpg" alt="Logo">
-            <h3>Auteur</h3>
-            <p>Zineb El Mouden | Hajar Oulabasse</p>
+    <div class="container">
+        <div id="map">
+          <div id="scale-line"></div>
+          <div id="mouse-position"></div>
         </div>
-        <div id="map"></div>
-        <div id="scale-line"></div>
-        <div id="mouse-position"></div>
-    </div>s
-
-    <!-- Partie droite : Cesium -->
-    <div class="right">
-        <div id="cesiumContainer"></div>
-        <div id="toolbar">
+        <div id="cesiumContainer">
+          <div id="toolbar">
             <button id="measureBtn">Measure Distance</button>
             <select id="unitSelect">
-                <option value="meters">Meters</option>
-                <option value="kilometers">Kilometers</option>
+              <option value="meters">Meters</option>
+              <option value="kilometers">Kilometers</option>
             </select>
+          </div>
         </div>
-    </div>
-</div>
-
+      </div>
 <script type="module" src="main.js"> </script>
 
 </body>
 </html>
+
