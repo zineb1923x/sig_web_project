@@ -18,6 +18,21 @@ const map = new ol.Map({
     zoom: 16
   })
 });
+function getLegendUrl(layerName) {
+    return `http://localhost:8080/geoserver/ehtp/wms?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetLegendGraphic&LAYER=${'ehtp:EHTP_'}&FORMAT=image/png`;
+}
+ 
+    const layers = { name: 'ehtp:EHTP_', label: 'Ehtp' };
+// Générer la légende WMS et l’afficher
+const legendContainer = document.getElementById("legend-content");
+
+const legendItem = document.createElement("div");
+legendItem.innerHTML = `
+  <p><strong>${layers.label}</strong></p>
+  <img src="${getLegendUrl(layers.name)}" alt="Légende indisponible" style="width: 100%;">
+`;
+legendContainer.appendChild(legendItem);
+
 
 const scaleControl = new ol.control.ScaleLine({
   units: 'metric',
@@ -52,6 +67,22 @@ async function initCesium() {
 
   viewer.scene.primitives.add(tileset);
   await viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 850));
+  // Synchronisation Cesium → OpenLayers
+viewer.camera.moveEnd.addEventListener(() => {
+    const cartographic = Cesium.Cartographic.fromCartesian(viewer.camera.position);
+    const lon = Cesium.Math.toDegrees(cartographic.longitude);
+    const lat = Cesium.Math.toDegrees(cartographic.latitude);
+  
+    const olCenter = ol.proj.fromLonLat([lon, lat]);
+  
+    const height = cartographic.height;
+    const olZoom = Math.log2(10000000 / height); // conversion d'altitude à zoom approx.
+  
+    map.getView().setCenter(olCenter);
+    map.getView().setZoom(olZoom);
+  });
+  
+
 }
 
 initCesium();
